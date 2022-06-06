@@ -5,6 +5,8 @@ import BookList from './pages/BookList';
 import BookPage from './pages/BookPage';
 import FAQ from './pages/FAQ';
 import Home from './pages/Home';
+import SignIn from './pages/SignIn';
+import SignUp from './pages/SignUp';
 import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
 import data from './data/books';
 
@@ -22,6 +24,8 @@ function App() {
           <Route path='/books' element={<BookList details={data} activeBtn changeBtn/> } exact/>{/* <BookList/> */}
           <Route path='/book' element={<BookPage activeBtn changeBtn/>} exact/>{/* <BookPage/> */}
           <Route path='/account' element={<Account activeBtn changeBtn/>} exact/>
+          <Route path='/sign-in' element={<SignIn/>} exact/>
+          <Route path='/sign-up' element={<SignUp/>} exact/>
         </Routes>
       </Router>
     </div>
