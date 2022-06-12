@@ -1,20 +1,18 @@
 import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
+import { useNavigate } from "react-router-dom";
+// import { Link } from 'react-router-dom';
+import authServices from '../services/auth-services/Auth.service'
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import singup from '../assets/signup.png';
-import { padding } from '@mui/system';
 
 function Copyright(props) {
   return (
@@ -32,13 +30,45 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignUp() {
-  const handleSubmit = (event) => {
+  const [email, setEmail] = React.useState();
+  const [password, setPassword] = React.useState();
+  const [fullName, setFullname] = React.useState();
+  const [userName, setUserName] = React.useState();
+  const [phone, setPhone] = React.useState();
+
+  const navigate = useNavigate();
+
+  const handleSubmit = async(event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    // setPassword(password1);
+    //     setLoading(true);
+    //     userController.checkUserName(telephone).then(r => {
+    //         if(r===true) {
+    //             setLoading(false);
+    //             setNotExists(true);
+    //         }else {
+    //             if (password1 === password2) {
+    //                 try {
+    //                     authService.signup(telephone, password).then((response) => {
+    //                         if(response) 
+    //                             navigate("/signin");
+    //                             setLoading(false);
+    //                         },
+    //                         (error) => {
+    //                             console.log(error);
+    //                             setLoading(false);
+    //                         }
+    //                     );
+    //                 } catch (err) {
+    //                     console.log(err);
+    //                 }
+    //             }
+    //             else {
+    //                 setLoading(false);
+    //                 setNotMatchPassowrd(true);
+    //             }
+    //         }
+    //     });
   };
 
   return (
