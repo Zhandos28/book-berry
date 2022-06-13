@@ -1,7 +1,6 @@
 import { Box, Typography, Grid , Checkbox, Button, IconButton, Collapse } from '@mui/material'
 import React, { useState } from 'react';
 import Footer from '../components/Footer'
-import Header from '../components/Header'
 import { Search, SearchIconWrapper, StyledInputBase } from '../components/Search/Search';
 import { Pagination } from "@material-ui/lab";
 import usePagination from "../components/Pagination/usePagination";
@@ -94,7 +93,6 @@ export default function BookList({details, activeBtn, changeBtn}) {
     }
   return (
     <div style={{backgroundImage:"linear-gradient( #00C2FF, #019CF3)"}}>
-        <Header activeBtn={activeBtn} changeBtn={changeBtn}/>
         <Box>
             <Typography sx={{fontSize:24, color:"white", textAlign:"center", my:"2%"}}>
                 Book List

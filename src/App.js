@@ -1,33 +1,23 @@
 import React from 'react';
 import Header from './components/Header';
-import Account from './pages/Account';
-import BookList from './pages/BookList';
-import BookPage from './pages/BookPage';
-import FAQ from './pages/FAQ';
-import Home from './pages/Home';
-import SignIn from './pages/SignIn';
-import SignUp from './pages/SignUp';
-import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
-import data from './data/books';
+import { useDispatch } from 'react-redux';
+import {setBooks} from './redux/actions/books';
+import bookController from './services/CRUD-services/Book-Controller';
+import AppRouter from './route/AppRouter';
 
 function App() {
-  const [activeBtn, setActiveBtn] = React.useState(null);
-  const changeBtn = (event) => {
-    setActiveBtn(event.target.value);
-  };
+  const dispatch = useDispatch();
+  React.useEffect(() => {
+    bookController.getBooks().then(result => {
+      dispatch(setBooks(result));
+    });
+  });
   return (
     <div className="App">
-      <Router>
-        <Routes>
-          <Route path='/' element={<Home data={data} activeBtn changeBtn/>} exact/>{/* <Home/> */}
-          <Route path='/faq' element={<FAQ activeBtn changeBtn/>} exact/>{/* <FAQ/> */}
-          <Route path='/books' element={<BookList details={data} activeBtn changeBtn/> } exact/>{/* <BookList/> */}
-          <Route path='/book' element={<BookPage activeBtn changeBtn/>} exact/>{/* <BookPage/> */}
-          <Route path='/account' element={<Account activeBtn changeBtn/>} exact/>
-          <Route path='/sign-in' element={<SignIn/>} exact/>
-          <Route path='/sign-up' element={<SignUp/>} exact/>
-        </Routes>
-      </Router>
+      {/* <RequireAuth>
+        <GetContent />
+      </RequireAuth> */}
+      <AppRouter />
     </div>
   );
 }

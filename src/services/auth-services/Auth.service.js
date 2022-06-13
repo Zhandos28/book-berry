@@ -7,9 +7,9 @@ const config = {
     }
 }
 
-const signin = async (telephone, password) => {
+const signin = async (email, password) => {
     return await axios.post(API_URL + "/signin", {
-        username: telephone,
+        login: email,
         password: password,
     }, config).then(response => {
         if (response) {
@@ -20,10 +20,13 @@ const signin = async (telephone, password) => {
     });
 };
 
-const signup = async (telephone, password) => {
+const signup = async (email, password, fullName, userName, phone) => {
     return await axios.post(API_URL + "/signup", {
-        username: telephone,
+        email: email,
         password: password,
+        firstName: fullName.split(" ")[0],
+        lastName: fullName.split(" ")[1],
+        mobileNumber: phone,
     }).then((response) => {
         if (response.data.accessToken) {
             localStorage.setItem("user", JSON.stringify(response.data));

@@ -32,43 +32,38 @@ const theme = createTheme();
 export default function SignUp() {
   const [email, setEmail] = React.useState();
   const [password, setPassword] = React.useState();
+  const [password2, setPassword2] = React.useState();
   const [fullName, setFullname] = React.useState();
   const [userName, setUserName] = React.useState();
   const [phone, setPhone] = React.useState();
+  const [loading, setLoading] = React.useState(false);
 
   const navigate = useNavigate();
 
   const handleSubmit = async(event) => {
     event.preventDefault();
-    // setPassword(password1);
-    //     setLoading(true);
-    //     userController.checkUserName(telephone).then(r => {
-    //         if(r===true) {
-    //             setLoading(false);
-    //             setNotExists(true);
-    //         }else {
-    //             if (password1 === password2) {
-    //                 try {
-    //                     authService.signup(telephone, password).then((response) => {
-    //                         if(response) 
-    //                             navigate("/signin");
-    //                             setLoading(false);
-    //                         },
-    //                         (error) => {
-    //                             console.log(error);
-    //                             setLoading(false);
-    //                         }
-    //                     );
-    //                 } catch (err) {
-    //                     console.log(err);
-    //                 }
-    //             }
-    //             else {
-    //                 setLoading(false);
-    //                 setNotMatchPassowrd(true);
-    //             }
-    //         }
-    //     });
+    setPassword(password);
+    setLoading(true);
+    
+    if (password === password2) {
+        try {
+            authServices.signup(email, password, fullName, userName, phone).then((response) => {
+                if(response) 
+                    navigate("/signin");
+                    setLoading(false);
+                },
+                (error) => {
+                    console.log(error);
+                    setLoading(false);
+                }
+            );
+        } catch (err) {
+            console.log(err);
+        }
+    }
+    else {
+        setLoading(false);
+    }
   };
 
   return (
@@ -92,7 +87,7 @@ export default function SignUp() {
         <Grid item xs={12} sm={8} md={8} component={Paper} elevation={6} square>
           <Box
             sx={{
-              my: 6,
+              my: 3,
               mx: 4,
               display: 'flex',
               flexDirection: 'column',
@@ -114,48 +109,49 @@ export default function SignUp() {
                         margin="dense"
                         required
                         fullWidth
-                        id="full-name"
                         label="Full Name"
-                        name="full-name"
-                        autoComplete="full-name"
+                        type="text"
+                        value={fullName}
+                        onChange={(e) => setFullname(e.target.value)}
                         autoFocus
                     />
                     <TextField
                         margin="dense"
                         required
+                        type = "email"
                         fullWidth
-                        id="email"
                         label="Email Address"
-                        name="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                         autoComplete="email"
-                        autoFocus
                     />
                     <TextField
                         margin="dense"
                         fullWidth
-                        id="phone"
+                        type = "text"
                         label="Phone number"
-                        name="phone"
+                        pattern="(\+7|8)[0-9]{3}[0-9]{3}[0-9]{2}[0-9]{2}"
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
                         autoComplete="phone"
-                        autoFocus
                     />  
                     <TextField
                         margin="dense"
                         required
                         fullWidth
-                        id="username"
-                        label="Username"
-                        name="username"
-                        autoFocus
+                        type="password"
+                        label="Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                     />
                     <TextField
                         margin="dense"
                         required
                         fullWidth
-                        name="password"
-                        label="Password"
                         type="password"
-                        id="password"
+                        label="Repeat Password"
+                        value={password2}
+                        onChange={(e) => setPassword2(e.target.value)}
                     />
                     
                 <Button

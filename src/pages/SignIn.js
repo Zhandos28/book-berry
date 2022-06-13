@@ -12,6 +12,7 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import AuthService from '../services/auth-services/Auth.service';
 
 import singin from '../assets/signin.png';
 import { padding } from '@mui/system';
@@ -32,13 +33,31 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignIn() {
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
+  const [notCorrect, setNotCorrect] = React.useState(false);
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    if (password !== "" && email !== "") {
+      setLoading(true);
+      try {
+          AuthService.signin(email, password).then((r) => {
+                  if(r.token) {
+                      setNotCorrect(false);
+                      window.location.href = "/";
+                  }
+              },
+              (error) => {
+                  setLoading(false);
+                  setNotCorrect(true);
+              }
+          );
+      } catch (err) {
+          setLoading(false);
+      }
+  }
   };
 
   return (

@@ -1,14 +1,14 @@
 import { combineReducers } from "redux";
-import booksReducer from "./spaces";
-import favoritesReducer from "./favorites";
+import booksReducer from "./books";
 import currentUserReduser from "./currentUser";
-import IdReducer from "./id";
-import bookReducer from "./space";
+import bookReducer from "./book";
+import basket from './basket';
 
 const rootReducer = combineReducers({
     books: booksReducer,
     currentUser: currentUserReduser,
-    book: bookReducer
+    book: bookReducer,
+    basket: basket
 });
 
 export default rootReducer;

@@ -1,4 +1,4 @@
-import AuthService from "../Auth.service/Auth.service";
+import AuthService from "../auth-services/Auth.service";
 
 const API_URL = "https://4ebd-37-99-45-122.eu.ngrok.io/";
 const config = {

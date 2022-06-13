@@ -1,7 +1,6 @@
 import React from 'react'
 import { Box, Button, Typography, Card, CardActions, CardMedia, CardContent, ButtonGroup } from '@mui/material';
 import Footer from '../components/Footer';
-import Header from '../components/Header';
 import reactStringReplace from 'react-string-replace';
 
 const data = [{
@@ -69,7 +68,6 @@ const data = [{
 export default function Account({activeBtn, changeBtn}) {
   return (
     <div style={{backgroundImage:"linear-gradient( #00C2FF, #019CF3)"}}>
-        <Header activeBtn={activeBtn} changeBtn={changeBtn}/>
         <Box sx={{px:"9%", display:"block", py:"2%"}}>
             <Typography sx={{color:"white", fontSize:30}}>
                 My Account
