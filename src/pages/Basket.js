@@ -66,21 +66,34 @@ const data = [{
     }
 ]
 
-export default function Basket({activeBtn, changeBtn}) {
+export default function Basket() {
+  const [value, setValue] = React.useState();
+  const [isSellectedAll, setIsSellectedAll] = React.useState(false); 
+
+  const handleChange = (event) => {
+    setValue(event.target.value);
+  } 
+
+  const handleSelect = () => {
+    setIsSellectedAll(!isSellectedAll);
+  }
   return (
     <div style={{backgroundImage:"linear-gradient( #00C2FF, #019CF3)"}}>
         <Box sx={{px:"9%", display:"block", py:"2%"}}>
-            <Typography sx={{color:"white", fontSize:30}}>
+            <Typography sx={{color:"white", fontSize:30, textAlign: "center"}}>
                 Basket
             </Typography>
             <Typography sx={{color:"white", fontSize:22, mt:1}}>
-                Select all
+                <input type="checkbox" name="action" checked onChange={handleSelect} id="all-select"/><label for="all-select">Select all</label>
             </Typography>
             <Card sx={{display:"block", px:"auto", backgroundColor:"inherit", my:1, border:"none", boxShadow: "none"}}>
                 {
                     data.map((book) => ( 
-                    <Box key={book.id} sx={{display:"flex", position:"relative", pb:5, mt:1}}>  
-                        <CardActions sx={{display:"block", py:2}}>    
+                    <Box key={book.id} sx={{ position:"relative", pb:5, mt:1}} style={{display: "flex"}}>  
+                        <CardActions sx={{display:"flex", py:2}}>  
+                        <input type="checkbox" value={data.id} onChange={handleSelect}
+                                style={{alignItems:"center"}}
+                            />  
                             <CardMedia
                                 component="img"
                                 height="185"
