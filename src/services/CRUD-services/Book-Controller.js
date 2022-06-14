@@ -13,7 +13,14 @@ const config = {
 const getBooks = async () => {
     return await axios.get(API_URL + "/books", config).then(response => {
         if(response) {
-            console.log(response.data)
+            return response.data;
+        }
+    })
+};
+
+const getMyBooks = async () => {
+    return await axios.get(API_URL + "/books/findByUser", config).then(response => {
+        if(response) {
             return response.data;
         }
     })
@@ -50,6 +57,7 @@ const addCommentToBook = async (id, data) => {
 
 const bookController = {
     getBooks,
+    getMyBooks,
     postNewBook,
     addCommentToBook,
     removeBook

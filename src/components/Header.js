@@ -18,7 +18,7 @@ const pages = [
   {title:'Book list', link:"/books", Icon:null},
   {title:'FAQ', link:"/faq", Icon:null}, 
   {title:'Contact us', link:"/", Icon:null}, 
-  {title:'Basket', link:"/", Icon:ShoppingCartIcon}, 
+  {title:'Basket', link:"/basket", Icon:ShoppingCartIcon}, 
   {title:'My Account', link:"/account", Icon:UserIcon}
 ];
 
