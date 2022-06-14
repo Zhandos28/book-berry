@@ -4,6 +4,7 @@ import {setBooks} from './redux/actions/books';
 import bookController from './services/CRUD-services/Book-Controller';
 import AppRouter from './route/AppRouter';
 import Header from './components/Header';
+import RequireAuth from './route/RequireAuth';
 
 function App() {
   const dispatch = useDispatch();
@@ -14,10 +15,10 @@ function App() {
   });
   return (
     <div className="App" >
-      {/* <RequireAuth>
-        <GetContent />
-      </RequireAuth> */}
-      <Header/>
+      <RequireAuth>
+        {/* <GetContent /> */}
+        <Header/>
+      </RequireAuth>
       <AppRouter />
     </div>
   );
