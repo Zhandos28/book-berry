@@ -44,7 +44,7 @@ const Header = () => {
   }
 
   return (
-    <AppBar position="static" style={{backgroundImage:"linear-gradient( #00C2FF, #019CF3)"}}>
+    <AppBar position="static" style={{backgroundImage:"linear-gradient(to right, #00C2FF, #019CF3)", boxShadow: "none"}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters sx={{justifyContent: "space-between"}}>
           <Typography

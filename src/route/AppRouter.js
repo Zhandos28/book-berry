@@ -9,6 +9,7 @@ import FAQ from '../pages/FAQ';
 import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
 import Basket from '../pages/Basket';
+import PostBook from '../pages/PostBook';
 
 
 const AppRouter = () => {
@@ -27,6 +28,9 @@ const AppRouter = () => {
             } />
             <Route  path="/basket" exact  element={
                 <Basket /> 
+            } />
+            <Route  path="/book/post" exact  element={
+                <PostBook />
             } />
             <Route
                 path="*"

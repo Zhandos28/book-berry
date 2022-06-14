@@ -28,8 +28,8 @@ export default function FAQ({activeBtn, changeBtn}) {
         }
     ]
   return (
-    <div style={{backgroundImage:"linear-gradient( #00C2FF, #019CF3)"}}>
-        <Typography sx={{fontSize:24, fontWeight:500, display:"flex", justifyContent:"center", my:"2%"}}>
+    <div style={{backgroundImage:"linear-gradient(to right, #00C2FF, #019CF3)"}}>
+        <Typography sx={{fontSize:24, fontWeight:500, display:"flex", justifyContent:"center", py:"2%"}}>
             Frequently Asked Questions
         </Typography>
         <Box sx={{minHeight:270, mx:"5%"}}>

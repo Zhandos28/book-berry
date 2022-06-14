@@ -10,7 +10,7 @@ import Header from '../components/Header';
 
 export default function Home({activeBtn, changeBtn}) {
   return (
-    <div style={{backgroundImage:"linear-gradient( #00C2FF, #019CF3)"}}>
+    <div style={{backgroundImage:"linear-gradient(to right, #00C2FF, #019CF3)"}}>
         <Banner/> 
         <QuoteCarousel/>
         <Recommendation/>
