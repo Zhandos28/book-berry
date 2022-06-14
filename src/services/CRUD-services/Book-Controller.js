@@ -6,13 +6,15 @@ const API_URL = headers.API_URL;
 const config = {
     headers: {
         'Content-Type': 'application/json',
+        'Authorization': "Bearer " + AuthService.getCurrentUser()
     }
 }
 
 const getBooks = async () => {
-    return await axios.get(API_URL + "/books").then(response => {
+    return await axios.get(API_URL + "/books", config).then(response => {
         if(response) {
-            return response.data.result;
+            console.log(response.data)
+            return response.data;
         }
     })
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Card, CardActions, CardMedia, CardContent, Rating, Typography, Box} from '@mui/material';
 
-export default function Book({url, title, author, score}) {
+export default function Book({url, name, author, score}) {
     const authorWords = author.split(" ");
   return (
     <Card sx={{display:"block", width:130, px:"auto", backgroundColor:"inherit", border: "none", boxShadow: "none" }}>
@@ -10,11 +10,11 @@ export default function Book({url, title, author, score}) {
                 component="img"
                 height="180"
                 image={url}
-                title={title}
+                title={name}
                 sx={{width:128, mx:"auto"}}
             />
             <CardContent sx={{mx:"auto", p:0, textAlign:"left", width:128, color:"white"}}>
-                {title.length > 15 ? `${title.substring(0, 15)}...` : title}
+                {name.length > 15 ? `${name.substring(0, 15)}...` : name}
             </CardContent>
             <Typography sx={{mx:"auto", width:128, width:128, fontSize:14, color:"white"}}>
                 {author.length > 12 ? `${authorWords[0]} ${authorWords[1]}` : author}

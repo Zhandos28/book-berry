@@ -10,20 +10,26 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import { Search, SearchIconWrapper, StyledInputBase } from '../components/Search/Search';
 import {Link} from "react-router-dom";
-
+import { useSelector, useDispatch } from 'react-redux';
   
-export default function Recommendation({details}) {
+export default function Recommendation() {
     const [activeButton, setActiveButton] = useState("Best seller");
     const [books, setBooks] = useState({items: []});
     const booksType = ["Best seller", "Popular", "News"];
     const [activeChild, setActiveChild] = useState(0);
     const [searchField, setSearchField] = useState("");
 
+    const { details } = useSelector(({ books }) => {
+      return {
+        details: books.items,
+      }
+    })
+
     const filteredBooks = details.filter(
       book => {
         return (
           book
-          .title
+          .name
           .toLowerCase()
           .includes(searchField.toLowerCase()) ||
           book
@@ -95,7 +101,7 @@ export default function Recommendation({details}) {
               {filteredBooks.map((book, index) => (
                   <div key={index} sx={{display:"flex", justifyContent:"spaceBetween", paddingLeft:5}}>
                     <Link to="/book">  
-                      <Book url={book.cover} title={book.title} author={book.author} score={book.rating}/>
+                      <Book url={book.photo.url} name={book.name} author={book.author} score={book.rating}/>
                     </Link>
                   </div>
               ))}

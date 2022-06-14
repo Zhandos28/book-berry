@@ -8,9 +8,16 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import ArrowButton from './Carousel/ArrowButton';
 import './Carousel/carousel.css'
+import { useSelector, useDispatch } from 'react-redux';
 
 export default function Discounts() {
     const [books, setBook] = useState({items:[]});
+
+    const { data } = useSelector(({ books }) => {
+      return {
+        data: books.items,
+      }
+    })
 
     useEffect(() => {
         const fetch = async() => {
@@ -81,7 +88,7 @@ export default function Discounts() {
                     <Slider {...settings}>
                         {data.map((book, index) => (
                             <Link key={index} to="/book">
-                                <Book url={book.cover} title={book.title} author={book.author} score={book.rating}/>
+                                <Book url={book.photo.url} name={book.name} author={book.author} score={book.rating}/>
                             </Link>
                         ))}
                     </Slider>

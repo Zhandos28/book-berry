@@ -8,13 +8,13 @@ import Sponsor from '../components/Sponsor';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 
-export default function Home({data, activeBtn, changeBtn}) {
+export default function Home({activeBtn, changeBtn}) {
   return (
     <div style={{backgroundImage:"linear-gradient( #00C2FF, #019CF3)"}}>
         <Header activeBtn changeBtn/>
         <Banner/> 
         <QuoteCarousel/>
-        <Recommendation details={data}/>
+        <Recommendation/>
         <Discounts/>
         <Sponsor/>
         <Footer/>

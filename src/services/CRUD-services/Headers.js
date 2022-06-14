@@ -1,9 +1,10 @@
 import AuthService from "../auth-services/Auth.service";
 
-const API_URL = "https://e5f5-37-99-43-240.eu.ngrok.io/";
+const API_URL = "https://f5da-37-99-39-21.eu.ngrok.io";
 const config = {
     headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': "Bearer " + AuthService.getCurrentUser()
     }
 }
 
