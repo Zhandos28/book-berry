@@ -17,7 +17,7 @@ const AppRouter = () => {
             <Route  path="/signin" exact  element={<SignIn />} />
             <Route  path="/signup" exact  element={<SignUp />} />
             <Route  path="/" exact  element={
-                <Home />
+                    <Home />
             }/>
             <Route  path="/books" exact  element={
                 <BookList />

@@ -69,7 +69,6 @@ const data = [{
 export default function Account({activeBtn, changeBtn}) {
   return (
     <div style={{backgroundImage:"linear-gradient( #00C2FF, #019CF3)"}}>
-        <Header />
         <Box sx={{px:"9%", display:"block", py:"2%"}}>
             <Typography sx={{color:"white", fontSize:30}}>
                 My Account

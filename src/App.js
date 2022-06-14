@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import {setBooks} from './redux/actions/books';
 import bookController from './services/CRUD-services/Book-Controller';
 import AppRouter from './route/AppRouter';
+import Header from './components/Header';
 
 function App() {
   const dispatch = useDispatch();
@@ -16,6 +17,7 @@ function App() {
       {/* <RequireAuth>
         <GetContent />
       </RequireAuth> */}
+      <Header/>
       <AppRouter />
     </div>
   );

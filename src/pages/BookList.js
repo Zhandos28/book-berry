@@ -94,7 +94,6 @@ export default function BookList({details, activeBtn, changeBtn}) {
     }
   return (
     <div style={{backgroundImage:"linear-gradient( #00C2FF, #019CF3)"}}>
-        <Header />
         <Box>
             <Typography sx={{fontSize:24, color:"white", textAlign:"center", my:"2%"}}>
                 Book List

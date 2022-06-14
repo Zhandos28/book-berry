@@ -29,7 +29,6 @@ export default function FAQ({activeBtn, changeBtn}) {
     ]
   return (
     <div style={{backgroundImage:"linear-gradient( #00C2FF, #019CF3)"}}>
-        <Header />
         <Typography sx={{fontSize:24, fontWeight:500, display:"flex", justifyContent:"center", my:"2%"}}>
             Frequently Asked Questions
         </Typography>

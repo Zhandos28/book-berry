@@ -22,8 +22,14 @@ const pages = [
   {title:'My Account', link:"/account", Icon:UserIcon}
 ];
 
-const Header = ({activeBtn, changeBtn}) => {
+const Header = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [activeBtn, setActiveBtn] = React.useState("");
+
+  const changeBtn = (event) => {
+    console.log(event.currentTarget.value);
+    setActiveBtn(event.currentTarget.value);
+  }; 
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
