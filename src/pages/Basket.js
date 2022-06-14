@@ -66,16 +66,16 @@ const data = [{
     }
 ]
 
-export default function Account({activeBtn, changeBtn}) {
+export default function Basket({activeBtn, changeBtn}) {
   return (
     <div style={{backgroundImage:"linear-gradient( #00C2FF, #019CF3)"}}>
         <Header />
         <Box sx={{px:"9%", display:"block", py:"2%"}}>
             <Typography sx={{color:"white", fontSize:30}}>
-                My Account
+                Basket
             </Typography>
             <Typography sx={{color:"white", fontSize:22, mt:1}}>
-                My reading books
+                Select all
             </Typography>
             <Card sx={{display:"block", px:"auto", backgroundColor:"inherit", my:1, border:"none", boxShadow: "none"}}>
                 {

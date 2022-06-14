@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Accordion, AccordionSummary, AccordionDetails, Typography, Box } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Footer from '../components/Footer';
+import Header from '../components/Header';
 
 export default function FAQ({activeBtn, changeBtn}) {
     const faq = [
@@ -28,6 +29,7 @@ export default function FAQ({activeBtn, changeBtn}) {
     ]
   return (
     <div style={{backgroundImage:"linear-gradient( #00C2FF, #019CF3)"}}>
+        <Header />
         <Typography sx={{fontSize:24, fontWeight:500, display:"flex", justifyContent:"center", my:"2%"}}>
             Frequently Asked Questions
         </Typography>

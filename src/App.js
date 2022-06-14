@@ -1,5 +1,4 @@
 import React from 'react';
-import Header from './components/Header';
 import { useDispatch } from 'react-redux';
 import {setBooks} from './redux/actions/books';
 import bookController from './services/CRUD-services/Book-Controller';

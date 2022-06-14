@@ -8,6 +8,8 @@ import BookList from '../pages/BookList';
 import FAQ from '../pages/FAQ';
 import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
+import Basket from '../pages/Basket';
+
 
 const AppRouter = () => {
     return (
@@ -22,6 +24,9 @@ const AppRouter = () => {
             } />
             <Route  path="/faq" exact  element={
                 <FAQ /> 
+            } />
+            <Route  path="/basket" exact  element={
+                <Basket /> 
             } />
             <Route
                 path="*"

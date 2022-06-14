@@ -11,6 +11,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { styled } from '@mui/material/styles';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {Link} from 'react-router-dom';
+import Header from '../components/Header';
 
 const filters = ["All", "For adults", "For children", "For boys", "For girls", "Fiction", "Scientific literature",
     "Kazakh literature", "Russian Literature", "World Literature", "Psyshology", "Busieness literature", "Political Science", "Philosophy", "History"    
@@ -93,6 +94,7 @@ export default function BookList({details, activeBtn, changeBtn}) {
     }
   return (
     <div style={{backgroundImage:"linear-gradient( #00C2FF, #019CF3)"}}>
+        <Header />
         <Box>
             <Typography sx={{fontSize:24, color:"white", textAlign:"center", my:"2%"}}>
                 Book List

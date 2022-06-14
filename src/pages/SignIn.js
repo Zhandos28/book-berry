@@ -43,8 +43,10 @@ export default function SignIn() {
     if (password !== "" && email !== "") {
       setLoading(true);
       try {
+          console.log(email)
+          console.log(password)
           AuthService.signin(email, password).then((r) => {
-                  if(r.token) {
+                  if(r) {
                       setNotCorrect(false);
                       window.location.href = "/";
                   }
@@ -99,20 +101,21 @@ export default function SignIn() {
                     margin="normal"
                     required
                     fullWidth
-                    id="email"
+                    value={email}
                     label="Email Address"
-                    name="email"
+                    type = "email"
                     autoComplete="email"
+                    onChange={(e) => setEmail(e.target.value)}
                     autoFocus
                 />
                 <TextField
                     margin="normal"
                     required
                     fullWidth
-                    name="password"
+                    value={password}
                     label="Password"
                     type="password"
-                    id="password"
+                    onChange={(e) => setPassword(e.target.value)}
                     autoComplete="current-password"
                 />
               <FormControlLabel

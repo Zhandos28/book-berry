@@ -2,6 +2,7 @@ import React from 'react'
 import { Box, Button, Typography, Card, CardActions, CardMedia, CardContent, ButtonGroup } from '@mui/material';
 import Footer from '../components/Footer';
 import reactStringReplace from 'react-string-replace';
+import Header from '../components/Header';
 
 const data = {
     "id": "547317",
@@ -54,6 +55,7 @@ export default function BookPage({activeBtn, changeBtn}) {
     ]
   return (
     <div style={{backgroundImage:"linear-gradient( #00C2FF, #019CF3)"}}>
+        <Header />
         <Box sx={{px:"9%", display:"block", py:"2%"}}>
             <Typography sx={{color:"white", fontSize:22}}>
                 The book "{data.title}" {data.author}

@@ -1,6 +1,6 @@
 import AuthService from "../auth-services/Auth.service";
 
-const API_URL = "https://4ebd-37-99-45-122.eu.ngrok.io/";
+const API_URL = "https://e5f5-37-99-43-240.eu.ngrok.io/";
 const config = {
     headers: {
         'Content-Type': 'application/json'

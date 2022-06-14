@@ -1,22 +1,24 @@
 import axios from "axios";
 
-const API_URL = "https://parkingkz.herokuapp.com/auth";
+const API_URL = "https://e5f5-37-99-43-240.eu.ngrok.io";
 const config = {
     headers: {
-        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Content-Type': 'application/json; charset=UTF-8'
     }
 }
 
 const signin = async (email, password) => {
     return await axios.post(API_URL + "/signin", {
-        login: email,
-        password: password,
-    }, config).then(response => {
+        "login": "duisenzhandos@gmail.co",
+        "password": "123"
+      }).then(response => {
         if (response) {
-            localStorage.setItem("user", JSON.stringify(response.data.token));
+            localStorage.setItem("user", JSON.stringify(response.data));
+            return response.data;
         }
-
-        return response.data;
+    }).catch(error => {
+        console.log(error);
     });
 };
 
@@ -45,7 +47,7 @@ const getCurrentUser = () => {
 };
 
 const removeCurrentUser = () => {
-    localStorage.removeItem("user");;
+    localStorage.removeItem("user");
 };
 
 const authService = {
