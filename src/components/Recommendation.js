@@ -10,7 +10,7 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import { Search, SearchIconWrapper, StyledInputBase } from '../components/Search/Search';
 import {Link} from "react-router-dom";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
   
 export default function Recommendation() {
     const [activeButton, setActiveButton] = useState("Best seller");

@@ -6,12 +6,11 @@ import { Pagination } from "@material-ui/lab";
 import usePagination from "../components/Pagination/usePagination";
 import SearchIcon from '@mui/icons-material/Search';
 import Book from '../components/Book';
-import data from '../data/books';
 import { makeStyles } from '@material-ui/core/styles';
 import { styled } from '@mui/material/styles';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {Link} from 'react-router-dom';
-import Header from '../components/Header';
+import { useSelector } from 'react-redux';
 
 const filters = ["All", "For adults", "For children", "For boys", "For girls", "Fiction", "Scientific literature",
     "Kazakh literature", "Russian Literature", "World Literature", "Psyshology", "Busieness literature", "Political Science", "Philosophy", "History"    
@@ -44,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-export default function BookList({details, activeBtn, changeBtn}) {
+export default function BookList() {
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
     const [isOpen, setIsOpen] = useState(false);
     const [activeButton, setActiveButton] = useState("Best seller");
@@ -58,11 +57,17 @@ export default function BookList({details, activeBtn, changeBtn}) {
     setExpanded(!expanded);
   };
 
+  const { details } = useSelector(({ books }) => {
+    return {
+      details: books.items,
+    }
+  })
+
   const filteredBooks = details.filter(
     book => {
       return (
         book
-        .title
+        .name
         .toLowerCase()
         .includes(searchField.toLowerCase()) ||
         book
@@ -93,9 +98,9 @@ export default function BookList({details, activeBtn, changeBtn}) {
         setIsOpen(!isOpen);
     }
   return (
-    <div style={{backgroundImage:"linear-gradient( #00C2FF, #019CF3)"}}>
+    <div style={{backgroundImage:"linear-gradient(to right, #00C2FF, #019CF3)"}}>
         <Box>
-            <Typography sx={{fontSize:24, color:"white", textAlign:"center", my:"2%"}}>
+            <Typography sx={{fontSize:24, color:"white", textAlign:"center", py:"2%"}}>
                 Book List
             </Typography>
             <Search>
@@ -141,7 +146,7 @@ export default function BookList({details, activeBtn, changeBtn}) {
                     _DATA.currentData().map((book) => (
                             <Grid item xs={3} key={book.id}>
                               <Link to="/book">
-                                <Book url={book.cover} title={book.title} author={book.author} score={book.rating}/>
+                                <Book url={book.photo.url} name={book.name} author={book.author} score={book.rating}/>
                               </Link>
                             </Grid>
                         ))  

@@ -10,6 +10,7 @@ import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
 import Basket from '../pages/Basket';
 import PostBook from '../pages/PostBook';
+import BookPage from '../pages/BookPage';
 
 
 const AppRouter = () => {
@@ -18,7 +19,7 @@ const AppRouter = () => {
             <Route  path="/signin" exact  element={<SignIn />} />
             <Route  path="/signup" exact  element={<SignUp />} />
             <Route  path="/" exact  element={
-                    <Home />
+                <Home />
             }/>
             <Route  path="/books" exact  element={
                 <BookList />
@@ -28,6 +29,9 @@ const AppRouter = () => {
             } />
             <Route  path="/basket" exact  element={
                 <Basket /> 
+            } />
+            <Route  path="/book" exact  element={
+                <BookPage />
             } />
             <Route  path="/book/post" exact  element={
                 <PostBook />
@@ -40,7 +44,6 @@ const AppRouter = () => {
                     </main>
                 }   
             />
-
         </Routes>
     );
 };
