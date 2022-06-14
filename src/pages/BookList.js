@@ -159,7 +159,7 @@ export default function BookList() {
                 variant="outlined"
                 shape="rounded"
                 onChange={handleChange}
-                className={classes.pagination}
+                className={classes.pagination} //  style
             />
         </Box>
         <Footer/>
