@@ -1,11 +1,10 @@
 import React from 'react';
 import {Box, Typography, CardContent, CardActions, CardMedia, Card, Button} from '@mui/material';
-import { width } from '@mui/system';
 import banner from '../assets/banner.png';
 
 export default function Banner() {
   return (
-    <Card sx={{ display: 'flex', flexDirection:"column", minHeight:400 }} style={{backgroundImage: "inherit"}}>
+    <Card sx={{ display: 'flex', flexDirection:"column", minHeight:400 }} style={{backgroundImage:"linear-gradient(to right, #00C2FF, #019CF3)", boxShadow: "none"}}>
         <Box sx={{ display: 'flex', ml:{md:13, xs:1}}}>
             <CardContent sx={{ display:'block', mt:7}}>
             <Typography component="div" variant="h3" sx={{color:"white", letterSpacing:3}}>
@@ -30,7 +29,7 @@ export default function Banner() {
             />
         </Box>
         <CardActions position="relative">
-            <Button variant="contained" size="large" sx={{ml:{md:14, xs:1, position:"absolute", top:365}, backgroundImage:"linear-gradient( #00C2FF, #019CF3)", borderRadius:32}}>View Library</Button>
+            <Button variant="contained" size="large" sx={{ml:{md:14, xs:1, position:"absolute", top:365}, backgroundImage:"linear-gradient(to right, #00C2FF, #019CF3)", borderRadius:32}}>View Library</Button>
         </CardActions>
 
     </Card>

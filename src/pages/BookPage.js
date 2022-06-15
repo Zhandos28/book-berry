@@ -6,12 +6,12 @@ import Header from '../components/Header';
 import { useSelector } from 'react-redux';
 
 
-export default function BookPage({activeBtn, changeBtn}) {
+export default function BookPage() {
     const { data } = useSelector(({ book }) => {
         return {
             data: book.item,
         }
-      })
+    })
     const buttons = ["TO BASKET", "TO FAVORITE"];
     const reactStringReplace = require('react-string-replace');
     const comments = [
@@ -30,9 +30,15 @@ export default function BookPage({activeBtn, changeBtn}) {
             date: "19.03.2020 14.15.54"
         }
     ]
+
+    React.useEffect(() => {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }, [])
+
   return (
     <div style={{backgroundImage:"linear-gradient(to right, #00C2FF, #019CF3)"}}>
-        {data &&
+        {data ?
         (<>   
             <Box sx={{px:"9%", display:"block", py:"2%"}}>
                 <Typography sx={{color:"white", fontSize:22}}>
@@ -116,8 +122,8 @@ export default function BookPage({activeBtn, changeBtn}) {
                 </Box>
             </Box>
             <Footer/>
-        </> 
-        )}
+        </>
+        ) : <div style={{height: '100vh'}}></div>}
     </div>
   )
 }

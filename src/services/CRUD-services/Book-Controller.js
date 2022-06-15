@@ -34,6 +34,12 @@ const getByType = async (type) => {
     })
 };
 
+const postDiscount = async (id, discount) => {
+    return await axios.post(API_URL + "/books/" + id + "/setDiscount/" + discount, {}, config).then(response => {
+        return response.status;
+    })
+};
+
 const postNewBook = async (data) => {
     return await axios.post(API_URL + "/books", data, config).then(
         response => {
@@ -67,6 +73,7 @@ const bookController = {
     getBooks,
     getMyBooks,
     getByType,
+    postDiscount,
     postNewBook,
     addCommentToBook,
     removeBook

@@ -13,11 +13,9 @@ const config = {
 const getPartners = async () => {
     return await axios.get(API_URL + "/quotes", config).then(response => {
         if(response) {
-            return response.data.result;
+            return response.data;
         }
-    }).catch(error => {
-        console.log(error);
-    });
+    })
 };
 
 const partnersController = {

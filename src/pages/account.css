@@ -3,4 +3,13 @@
     -webkit-line-clamp: 10;
     -webkit-box-orient: vertical;  
     overflow: hidden;
-  }
+}
+
+.discount {
+    visibility: hidden;
+}
+
+.showDiscount {
+    visibility: visible;
+}
+

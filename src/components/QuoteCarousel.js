@@ -1,17 +1,21 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Carousel from "react-material-ui-carousel";
 import {Typography, Box} from "@mui/material";
 import { height, maxHeight, width } from "@mui/system";
+import quotesController from "../services/CRUD-services/Quotes";
 
 function QuoteCarousel() {
   // State to programmatically set active child
   const [activeChild, setActiveChild] = useState(0);
 
   // Basically items = [1, 2, 3, 4]
-  const items = useMemo(() => [
-      "\"Theory is when everything is known, but nothing works. Practice is when everything works, but nobody knows why. We combine theory and practice: nothing works ... and no one knows why!\" - Albert Einstein", 
-      "\"Returning from his flocks, pleased with his ride. Again in the aul appears the bai. His horse goes on with an easy stride, He sits and smiles upon it, hat awry.\" ― Abai Kunanbayev",
-  ], []);
+  const [items, setItems] =  useState([]);
+
+  useEffect(() => {
+    quotesController.getQuotes().then(r => {
+      if (r) setItems([...r])
+    })
+  }, []);
 
   // The Keypress Event Handler
   const changeChild = useCallback(
@@ -61,10 +65,10 @@ function QuoteCarousel() {
     
         sx={{height:"auto", backgroundColor:"white", mx:'5%', px:7, py:3}}
       >
-        {items.map((i) => {
+        {items.map((item) => {
           return (
-            <Typography align="center" variant="h6" key={i} sx={{mt:{sm:"1%", md:"2%"}}}>
-              {i}
+            <Typography align="center" variant="h6" key={item.id} sx={{mt:{sm:"1%", md:"2%"}}}>
+              {item.name} - {item.author}
             </Typography>
           );
         })}

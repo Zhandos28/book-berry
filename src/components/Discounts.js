@@ -1,33 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Box, Typography, Grid, Button } from '@mui/material';
+import { Box, Typography, Button } from '@mui/material';
 import Slider from 'react-slick';
 import Book from './Book';
-import data from '../data/books';
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-import ArrowButton from './Carousel/ArrowButton';
 import './Carousel/carousel.css'
-import { useSelector, useDispatch } from 'react-redux';
+import bookController from '../services/CRUD-services/Book-Controller';
+import { useDispatch } from 'react-redux';
+import { setBook } from '../redux/actions/book';
 
 export default function Discounts() {
-    const [books, setBook] = useState({items:[]});
-
-    const { data } = useSelector(({ books }) => {
-      return {
-        data: books.items,
-      }
-    })
-
-    useEffect(() => {
-        const fetch = async() => {
-            setBook({items:data});
-            console.log(books)
-            console.log(data)
-        }
-        fetch()
-            .catch(console.error);
+    const [discounts, setDiscounts] = useState([]);
+    
+    React.useEffect(() => {
+      bookController.getByType("DISCOUNT").then(result => {
+        setDiscounts([...result]);
+      })
     }, []);
+
+    const dispatch = useDispatch();
+    const handleRead = (book) => {
+      dispatch(setBook(book));
+    };
+
     const settings = {
       className: "center",
       infinite: true,
@@ -86,8 +82,8 @@ export default function Discounts() {
 
                 <Box sx={{px:"18%",}} className='content'>
                     <Slider {...settings}>
-                        {data.map((book, index) => (
-                            <Link key={index} to="/book">
+                        {discounts.map((book, index) => (
+                            <Link key={index} onClick={() => handleRead(book)} to="/book">
                                 <Book url={book.photo.url} name={book.name} author={book.author} score={book.rating}/>
                             </Link>
                         ))}

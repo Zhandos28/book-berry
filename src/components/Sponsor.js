@@ -5,6 +5,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import bkg from '../assets/background.png'
+import sponsorController from '../services/CRUD-services/Sponsor';
 
 const data = [
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSegJDXLdD91hqZ5UJZ4qDKYRtPKrRP_NvLmQ&usqp=CAU",
@@ -25,6 +26,13 @@ function ArrowButton(props) {
   }
 
 export default function Sponsor() {
+    const [items, setItems] =  useState([]);
+
+    useEffect(() => {
+      sponsorController.getSponsor().then(r => {
+        if (r) setItems([...r])
+      })
+    }, []);
     
     const settings = {
       className: "center",
@@ -69,9 +77,9 @@ export default function Sponsor() {
             <Box sx={{backgroundColor:"white", py:"3%"}}>
                 <Box sx={{px:"18%",}} className='content'>
                     <Slider {...settings}>
-                        {data.map((book, index) => (
+                        {items.map((item, index) => (
                             <div key={index}>
-                                <img src={book} style={{width:"130px",height: "130px"}}/>
+                                <img src={item.photos[0].url} style={{width:"130px",height: "130px"}}/>
                             </div>
                         ))}
                     </Slider>
