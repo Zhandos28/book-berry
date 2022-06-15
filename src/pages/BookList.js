@@ -2,7 +2,7 @@ import { Box, Typography, Grid , Checkbox, Button, IconButton, Collapse } from '
 import React, { useState } from 'react';
 import Footer from '../components/Footer'
 import { Search, SearchIconWrapper, StyledInputBase } from '../components/Search/Search';
-import { Pagination } from "@material-ui/lab";
+import Pagination from '@mui/material/Pagination';
 import usePagination from "../components/Pagination/usePagination";
 import SearchIcon from '@mui/icons-material/Search';
 import Book from '../components/Book';
@@ -31,11 +31,12 @@ const ExpandMore = styled((props) => {
   }));
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-      '& > *': {
-        marginTop: theme.spacing(2),
-      },
-    },
+  root: {
+    '& ul > li:not(:first-child):not(:last-child) > button:not(.Mui-selected)': {
+      backgroundColor: 'transparent',
+      color:'#19D5C6',
+     },
+  },
     pagination: {
       display: 'flex',
       justifyContent: 'center',
@@ -152,7 +153,8 @@ export default function BookList() {
                         ))  
                 }           
             </Grid>
-            <Pagination
+        </Box>
+        <Pagination
                 count={count}
                 size="large"
                 page={page}
@@ -161,7 +163,6 @@ export default function BookList() {
                 onChange={handleChange}
                 className={classes.pagination} //  style
             />
-        </Box>
         <Footer/>
     </div>
   )
