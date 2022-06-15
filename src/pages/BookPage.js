@@ -1,8 +1,6 @@
 import React from 'react'
 import { Box, Button, Typography, Card, CardActions, CardMedia, CardContent, ButtonGroup } from '@mui/material';
 import Footer from '../components/Footer';
-import reactStringReplace from 'react-string-replace';
-import Header from '../components/Header';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { setBasket } from '../redux/actions/basket';
@@ -14,7 +12,7 @@ export default function BookPage() {
             data: book.item,
         }
     })
-    const buttons = ["TO BASKET", "TO FAVORITE"];
+
     const reactStringReplace = require('react-string-replace');
     const comments = [
         {
