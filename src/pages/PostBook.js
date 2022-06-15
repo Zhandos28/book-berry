@@ -17,6 +17,7 @@ import FormControl from '@mui/material/FormControl';
 import ListItemText from '@mui/material/ListItemText';
 import Select from '@mui/material/Select';
 import bookController from '../services/CRUD-services/Book-Controller';
+import fileUpload from '../services/CRUD-services/file-upload';
 
 const useStyles = makeStyles((theme) => (
   {
@@ -80,7 +81,6 @@ export default function PostBook() {
   const [language, setLanguage] = React.useState("");
   const [quantity, setQuantity] = React.useState("");
   const [ageLimit, setAgeLimit] = React.useState("");
-  const [photo, setPhoto] = React.useState();
 
   // description
   const [description, setDescription] = React.useState('');
@@ -117,66 +117,36 @@ export default function PostBook() {
   }
 
   const submit = () => {
-    if (!loading) {
-      setSuccess(false);
-      setLoading(true);
-      setSuccess(true);
-      setLoading(false); 
-    }
-
-    // [
-      //   {
-      //     id: 0,
-      //     name: "string"
-      //   }
-      // ],
-
-    let d = {
-      name: name,
-      description: description,
-      ageLimit: ageLimit,
-      author: author,
-      language: language,
-      quantity: quantity,
-      categories: categories,
-      numberOfPage: pages,
-      photo: {
-        name: "",
-        url: ""
+    if (selectedImage && name && author && pages && language && quantity && ageLimit) {
+      if (!loading) {
+        setSuccess(false);
+        setLoading(true);
       }
-    }
-
-    console.log(d);
-    if (false) {
-      if(selectedImage) {
-        // formData.append("file", image)
-        // fileStorageController.getFileUrl(formData).then(r => {
-        //   r.forEach(image => {
-        //       setPhoto({photoAddress: image.url, filename: image.filename});
-        //   });
-        // })    
-      }
-      bookController.postNewBook({
-        name: name,
-        description: description,
-        ageLimit: ageLimit,
-        author: author,
-        language: language,
-        quantity: quantity,
-        categories: categories,
-        numberOfPage: pages,
-        photo: {
-          name: "",
-          url: ""
-        }
-      }).then(r => {
+      formData.append("file", selectedImage)
+      fileUpload.getFileUrl(formData).then(r => {
         if (r) {
-          setSuccess(true);
-          setLoading(false);
+          bookController.postNewBook({
+            name: name,
+            description: description,
+            ageLimit: ageLimit,
+            author: author,
+            quantity: quantity,
+            photo: {
+              name: r[0].filename,
+              url: r[0].url
+            }
+          }).then(r => {
+            if (r) {
+              setSuccess(true);
+              setLoading(false);
+              window.location.reload();
+            }
+          })
         }
       })
     }
   };
+
   return (
     <>
       <div style={{backgroundImage:"linear-gradient(to right, #00C2FF, #019CF3)"}}>
@@ -306,8 +276,8 @@ export default function PostBook() {
                     </div>
                   )}
                 </div>
-                <div className='mt-3 inline-block text-center' style={{ marginTop: "12px", display: "inline-block", textAlign: "center"}}>
-                    <label htmlFor="image_uploads" className="flex w-48 items-center justify-center" style={{ display: "flex", justifyContent: "center", width: "100px", alignItems: 'center', height: "40px", backgroundColor: "blue", borderRadius:4}}>
+                <div style={{ marginTop: "12px", display: "inline-block", textAlign: "center"}}>
+                    <label htmlFor="image_uploads" style={{ display: "flex", justifyContent: "center", width: "100px", alignItems: 'center', height: "40px", backgroundColor: "blue", borderRadius:4}}>
                         Photo
                         <input
                           type="file"
