@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { setBook } from '../redux/actions/book';
 import bookController from '../services/CRUD-services/Book-Controller';
 import './account.css';
+import AddIcon from '@mui/icons-material/Add';
 
 
 export default function Account() {
@@ -107,6 +108,12 @@ export default function Account() {
                     </Box>  
                    )) : <div style={{height: '100vh'}}></div>
                 }
+
+                <Link to="/book/post">
+                    <Button variant="contained" size="small" sx={{backgroundColor: "white", borderRadius:1, width:20, color:'black', position:"fixed", bottom:45, right:20,}}>
+                        <AddIcon sx={{color: 'blue', fontSize: "45px"}}/>
+                    </Button>
+                </Link>
             </Card>
         </Box>
         <Footer/>

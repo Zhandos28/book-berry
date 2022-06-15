@@ -7,17 +7,16 @@ import Button from '@material-ui/core/Button';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Container from '@mui/material/Container';
 import Footer from '../components/Footer';
-import TextareaAutosize from '@mui/material/TextareaAutosize';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import ListItemText from '@mui/material/ListItemText';
 import Select from '@mui/material/Select';
+import bookController from '../services/CRUD-services/Book-Controller';
 
 const useStyles = makeStyles((theme) => (
   {
@@ -65,17 +64,10 @@ const MenuProps = {
 };
 
 const names = [
-  'Oliver Hansen',
-  'Van Henry',
-  'April Tucker',
-  'Ralph Hubbard',
-  'Omar Alexander',
-  'Carlos Abbott',
-  'Miriam Wagner',
-  'Bradley Wilkerson',
-  'Virginia Andrews',
-  'Kelly Snyder',
+  'fiction',
+  'science',
 ];
+
 export default function PostBook() {
   const classes = useStyles();
   const [loading, setLoading] = React.useState(false);
@@ -84,25 +76,21 @@ export default function PostBook() {
   // for submit
   const [firstName, setFirstName] = React.useState("");
   const [lastName, setLastName] = React.useState("");
-  const [address, setAddress] = React.useState("");
-  const [city, setCity] = React.useState("");
-  const [state, setState] = React.useState("");
-  const [country, setCountry] = React.useState("");
-  const [phone, setPhone] = React.useState("");
+  const [pages, setPages] = React.useState(0);
 
   // description
-  const [value, setValue] = React.useState('Controlled');
+  const [description, setDescription] = React.useState('');
   const handleChangeDescription = (event) => {
-    setValue(event.target.value);
+    setDescription(event.target.value);
   };
 
   // categories
-  const [personName, setPersonName] = React.useState([]);
+  const [categories, setCategories] = React.useState([]);
   const handleChangeCategories = (event) => {
     const {
       target: { value },
     } = event;
-    setPersonName(
+    setCategories(
       // On autofill we get a stringified value.
       typeof value === 'string' ? value.split(',') : value,
     );
@@ -112,16 +100,38 @@ export default function PostBook() {
     [classes.buttonSuccess]: success,
   });
 
-  const handleButtonClick = () => {
+  const submit = () => {
     if (!loading) {
       setSuccess(false);
       setLoading(true);
       
     }
 
-    if (true) {
-      setSuccess(true);
-      setLoading(false);
+    if (false) {
+      bookController.postNewBook({
+        name: "string",
+        description: "string",
+        ageLimit: 0,
+        author: "string",
+        language: 0,
+        quantity: 0,
+        categories: [
+          {
+            id: 0,
+            name: "string"
+          }
+        ],
+        numberOfPage: 0,
+        photo: {
+          name: "string",
+          url: "string"
+        }
+      }).then(r => {
+        if (r) {
+          setSuccess(true);
+          setLoading(false);
+        }
+      })
     }
   };
   return (
@@ -167,20 +177,20 @@ export default function PostBook() {
                   required
                   fullWidth
                   maxRows={4}
-                  value={value}
+                  value={description}
                   onChange={handleChangeDescription}
                   variant="standard"
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
                 <FormControl sx={{ m: 1, width: 250 }}>
-                  <InputLabel id="demo-multiple-checkbox-label">Tag</InputLabel>
+                  <InputLabel id="demo-multiple-checkbox-label">Categories</InputLabel>
                   <Select
                     labelId="demo-multiple-checkbox-label"
                     id="demo-multiple-checkbox"
                     multiple
                     required
-                    value={personName}
+                    value={categories}
                     onChange={handleChangeCategories}
                     input={<OutlinedInput label="Tag" />}
                     renderValue={(selected) => selected.join(', ')}
@@ -188,7 +198,7 @@ export default function PostBook() {
                   >
                     {names.map((name) => (
                       <MenuItem key={name} value={name} style={{display: "flex", height: "50px"}}>
-                        <Checkbox checked={personName.indexOf(name) > -1}/>
+                        <Checkbox checked={categories.indexOf(name) > -1}/>
                         <ListItemText primary={name} />
                       </MenuItem>
                     ))}
@@ -197,10 +207,10 @@ export default function PostBook() {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  value={state}
-                  onChange={(e) => setState(e.target.value)}
-                  id="state"
-                  name="state"
+                  value={pages}
+                  onChange={(e) => setPages(e.target.value)}
+                  id="pages"
+                  name="pages"
                   required
                   label="Number of Pages"
                   fullWidth
@@ -214,7 +224,7 @@ export default function PostBook() {
                 color="primary"
                 className={buttonClassname}
                 disabled={loading}
-                onClick={handleButtonClick}
+                onClick={submit}
               >
                 {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
                   SUBMIT  
