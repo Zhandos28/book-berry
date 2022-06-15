@@ -50,7 +50,7 @@ const rows = [
 
 export default function DataGridDemo() {
   return (
-    <div style={{ height: 500, width: '90%', paddingLeft: "5%", paddingRight: "5%", backgroundImage: "linear-gradient(to right, #00C2FF, #019CF3)", paddingBottom: "1%", paddingTop: "1%" }}>
+    <div style={{ height: 500, width: '90%', paddingLeft: "5%", paddingRight: "5%", backgroundImage: "linear-gradient(to right, #00C2FF, #019CF3)", paddingBottom: "20px", paddingTop: "20px" }}>
       <DataGrid
         rows={rows}
         columns={columns}
