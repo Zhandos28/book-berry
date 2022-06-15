@@ -121,7 +121,7 @@ export default function BookList() {
                   inputProps={{ 'aria-label': 'search' }}
                   onChange = {handleChanges}
                 />
-            </Search>      
+            </Search>  
             <Box sx={{display:'flex', my:6, justifyContent:"space-between", width: 340, mx:'37%'}}>
             {
                 booksType.map((btn) => (
