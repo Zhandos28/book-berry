@@ -123,6 +123,9 @@ export default function Basket() {
                     </Box>  
                    ))
                 }
+                <Button style={{float: "right", width: "150px", backgroundColor: "white", color: "black", fontWeight: 500, px:2}} onChange={onMinusItem}>
+                    Checkout
+                </Button>
             </Card>
         </Box>
         <Footer/>

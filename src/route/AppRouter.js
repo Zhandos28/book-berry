@@ -13,6 +13,7 @@ import PostBook from '../pages/PostBook';
 import BookPage from '../pages/BookPage';
 import Account from '../pages/Account';
 import Checkout from '../pages/Checkout';
+import IncomingApplications from '../pages/IncomingApplications';
 
 
 const AppRouter = () => {
@@ -43,6 +44,9 @@ const AppRouter = () => {
             } />
             <Route  path="/checkout" exact  element={
                 <Checkout />
+            } />
+            <Route  path="/applications" exact  element={
+                <IncomingApplications />
             } />
             <Route
                 path="*"
