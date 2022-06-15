@@ -114,25 +114,6 @@ export default function BookList() {
                   onChange = {handleChanges}
                 />
             </Search>
-            {/* <ExpandMore
-                expand={expanded}
-                onClick={handleExpandClick}
-                aria-expanded={expanded}
-                aria-label="show more"
-                >
-                <ExpandMoreIcon sx={{textAlign:"center"}}/>
-            </ExpandMore>
-            <Collapse in={expanded} timeout="auto" unmountOnExit sx={{display:"grid"}}>
-                <Grid container sx={{width:"48%", mx:"24%", pt:"4%", px:"3%"}}>
-                    {
-                        filters.map((data) => (
-                                <Grid item xs={4} key={data}>
-                                    <Typography><Checkbox {...label} />{data}</Typography>
-                                </Grid>
-                            ))  
-                    }  
-                </Grid>   
-            </Collapse>       */}
             <Box sx={{display:'flex', my:6, justifyContent:"space-between", width: 340, mx:'37%'}}>
             {
                 booksType.map((btn) => (
