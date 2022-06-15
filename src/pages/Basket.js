@@ -2,6 +2,8 @@ import React from 'react'
 import { Box, Button, Typography, Card, CardActions, CardMedia, CardContent, ButtonGroup } from '@mui/material';
 import Footer from '../components/Footer';
 import reactStringReplace from 'react-string-replace';
+import ArrowDropUpOutlinedIcon from '@mui/icons-material/ArrowDropUpOutlined';
+import ArrowDropDownOutlinedIcon from '@mui/icons-material/ArrowDropDownOutlined';
 
 const data = [{
     "id": "547317",
@@ -78,7 +80,7 @@ export default function Basket() {
   }
 
   return (
-    <div style={{backgroundImage:"linear-gradient( #00C2FF, #019CF3)"}}>
+    <div style={{backgroundImage:"linear-gradient(to right, #00C2FF, #019CF3)"}}>
         <Box sx={{px:"9%", display:"block", py:"2%"}}>
             <Typography sx={{color:"white", fontSize:30, textAlign: "center"}}>
                 Basket
@@ -111,9 +113,9 @@ export default function Basket() {
                         <ButtonGroup orientation="vertical" aria-label="vertical contained button group"
                                 variant="contained"
                                 sx={{height: "110px", position:"absolute", bottom: "110px", right: "20px"}}>
-                            <Button>One</Button>
-                            <Button>Two</Button>
-                            <Button>Three</Button>
+                            <ArrowDropUpOutlinedIcon style={{color: 'white', }}/>
+                            <input style={{width: '20px'}}/>
+                            <ArrowDropDownOutlinedIcon style={{color: 'white', }}/>
                         </ButtonGroup>
                     </Box>  
                    ))
