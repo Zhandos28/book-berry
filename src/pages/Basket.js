@@ -2,7 +2,6 @@ import React from 'react'
 import { Box, Button, Typography, Card, CardActions, CardMedia, CardContent, ButtonGroup } from '@mui/material';
 import Footer from '../components/Footer';
 import reactStringReplace from 'react-string-replace';
-import Header from '../components/Header';
 
 const data = [{
     "id": "547317",
@@ -77,6 +76,7 @@ export default function Basket() {
   const handleSelect = () => {
     setIsSellectedAll(!isSellectedAll);
   }
+
   return (
     <div style={{backgroundImage:"linear-gradient( #00C2FF, #019CF3)"}}>
         <Box sx={{px:"9%", display:"block", py:"2%"}}>
@@ -84,16 +84,16 @@ export default function Basket() {
                 Basket
             </Typography>
             <Typography sx={{color:"white", fontSize:22, mt:1}}>
-                <input type="checkbox" name="action" checked onChange={handleSelect} id="all-select"/><label for="all-select">Select all</label>
+                <input type="checkbox" name="all" onChange={handleSelect} id="all-select"/><label for="all-select">Select all</label>
             </Typography>
             <Card sx={{display:"block", px:"auto", backgroundColor:"inherit", my:1, border:"none", boxShadow: "none"}}>
                 {
                     data.map((book) => ( 
-                    <Box key={book.id} sx={{ position:"relative", pb:5, mt:1}} style={{display: "flex"}}>  
-                        <CardActions sx={{display:"flex", py:2}}>  
-                        <input type="checkbox" value={data.id} onChange={handleSelect}
-                                style={{alignItems:"center"}}
-                            />  
+                    <Box key={book.id} sx={{ position:"relative", pb:5, mt:1, display: "flex"}}>  
+                        <CardActions sx={{display:"flex", py:2, justifyContent:"space-between"}}> 
+                            {isSellectedAll ?  <input type="checkbox" checked name="all" onChange={handleSelect} id="all-select"/> : 
+                                <input type="checkbox" name="all" onChange={handleSelect} id="all-select"/>
+                            }   
                             <CardMedia
                                 component="img"
                                 height="185"
@@ -106,11 +106,15 @@ export default function Basket() {
                             <Typography sx={{fontSize:19}}>
                                 The book "{book.title}" {book.author}
                             </Typography>
-                            {reactStringReplace(book.description, '<P>', (match, i) => (<br/>))}
+                            <div className='line-clamp'>{reactStringReplace(book.description, '<P>', (match, i) => (<br/>))}</div>
                         </CardContent>
-                        <Button variant="contained" size="small" sx={{backgroundColor:"white", borderRadius:1, width:128, color:'black', position:"absolute", bottom:45, right:20}}>
-                            READ
-                        </Button>
+                        <ButtonGroup orientation="vertical" aria-label="vertical contained button group"
+                                variant="contained"
+                                sx={{height: "110px", position:"absolute", bottom: "110px", right: "20px"}}>
+                            <Button>One</Button>
+                            <Button>Two</Button>
+                            <Button>Three</Button>
+                        </ButtonGroup>
                     </Box>  
                    ))
                 }
