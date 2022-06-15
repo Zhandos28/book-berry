@@ -11,6 +11,8 @@ import 'slick-carousel/slick/slick-theme.css'
 import { Search, SearchIconWrapper, StyledInputBase } from '../components/Search/Search';
 import {Link} from "react-router-dom";
 import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { setBook } from '../redux/actions/book';
   
 export default function Recommendation() {
     const [activeButton, setActiveButton] = useState("Best seller");
@@ -24,6 +26,11 @@ export default function Recommendation() {
         details: books.items,
       }
     })
+
+    const dispatch = useDispatch();
+    const handleRead = (book) => {
+      dispatch(setBook(book));
+    };
 
     const filteredBooks = details.filter(
       book => {
@@ -61,19 +68,19 @@ export default function Recommendation() {
     };
 
     useEffect(() => {
-        // declare the data fetching function
-        const fetchData = async () => {
-          // const data = await fetch(booksData);
-          setBooks({items: booksData});
-          // console.log(data);
-          console.log(books);
-        }
-      
-        // call the function
-        fetchData()
-          // make sure to catch any error
-          .catch(console.error);
-      }, []);
+      // declare the data fetching function
+      const fetchData = async () => {
+        // const data = await fetch(booksData);
+        setBooks({items: booksData});
+        // console.log(data);
+        console.log(books);
+      }
+    
+      // call the function
+      fetchData()
+        // make sure to catch any error
+        .catch(console.error);
+    }, []);
   
   return (
     <Box sx={{display:"block", backgroundImage:"linear-gradient( #00C2FF, #019CF3)", minHeight:550, py:8}}>
@@ -100,7 +107,7 @@ export default function Recommendation() {
           <Slider {...settings}>
               {filteredBooks.map((book, index) => (
                   <div key={index} sx={{display:"flex", justifyContent:"spaceBetween", paddingLeft:5}}>
-                    <Link to="/book">  
+                    <Link onClick={() => handleRead(book)} to="/book">  
                       <Book url={book.photo.url} name={book.name} author={book.author} score={book.rating}/>
                     </Link>
                   </div>
