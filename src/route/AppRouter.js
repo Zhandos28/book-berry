@@ -12,6 +12,7 @@ import Basket from '../pages/Basket';
 import PostBook from '../pages/PostBook';
 import BookPage from '../pages/BookPage';
 import Account from '../pages/Account';
+import Checkout from '../pages/Checkout';
 
 
 const AppRouter = () => {
@@ -39,6 +40,9 @@ const AppRouter = () => {
             } />
             <Route  path="/book/post" exact  element={
                 <PostBook />
+            } />
+            <Route  path="/checkout" exact  element={
+                <Checkout />
             } />
             <Route
                 path="*"
