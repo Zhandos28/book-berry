@@ -114,7 +114,7 @@ export default function BookList() {
                   onChange = {handleChanges}
                 />
             </Search>
-            <ExpandMore
+            {/* <ExpandMore
                 expand={expanded}
                 onClick={handleExpandClick}
                 aria-expanded={expanded}
@@ -132,7 +132,7 @@ export default function BookList() {
                             ))  
                     }  
                 </Grid>   
-            </Collapse>      
+            </Collapse>       */}
             <Box sx={{display:'flex', my:6, justifyContent:"space-between", width: 340, mx:'37%'}}>
             {
                 booksType.map((btn) => (

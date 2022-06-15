@@ -1,6 +1,6 @@
 import axios from "axios";
 import headers from "./Headers";
-import authService from "../../services/Auth.service/Auth.service";
+import authService from "../auth-services/Auth.service";
 
 const API_URL = headers.API_URL;
 const config = headers.config;

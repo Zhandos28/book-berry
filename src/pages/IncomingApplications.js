@@ -1,39 +1,42 @@
 import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import Footer from '../components/Footer';
-
+import applicationsController from '../services/CRUD-services/Applications';
+import userController from '../services/CRUD-services/UserController';
 
 const columns = [
   { field: 'id', headerName: 'ID', width: 90 },
   {
-    field: 'firstName',
-    headerName: 'First name',
-    width: 150,
-    editable: true,
-  },
-  {
-    field: 'lastName',
-    headerName: 'Last name',
-    width: 150,
-    editable: true,
-  },
-  {
-    field: 'age',
-    headerName: 'Age',
-    type: 'number',
-    width: 110,
-    editable: true,
-  },
-  {
-    field: 'fullName',
+    field: 'checkout',
     headerName: 'Full name',
     description: 'This column has a value getter and is not sortable.',
     sortable: false,
     width: 160,
-    valueGetter: (params) =>
-      `${params.getValue(params.id, 'firstName') || ''} ${
-        params.getValue(params.id, 'lastName') || ''
-      }`,
+  },
+  {
+    field: 'name',
+    headerName: 'Book Title',
+    width: 150,
+  },
+  {
+    field: 'city',
+    headerName: 'City',
+    width: 150,
+  },
+  {
+    field: 'country',
+    headerName: 'Country',
+    width: 110,
+  },
+  {
+    field: 'phoneNumber',
+    headerName: 'Phone',
+    width: 110,
+  },
+  {
+    field: 'email',
+    headerName: 'Email',
+    width: 110,
   },
 ];
 
@@ -50,10 +53,18 @@ const rows = [
 ];
 
 export default function DataGridDemo() {
+  const [items, setItems] = React.useState([]);
+
+  React.useEffect(() => {
+      applicationsController.getApplications().then(r => {
+        if (r) setItems(r);
+      })
+  }, []);
+
   return (
     <div style={{ height: 500, width: '90%', paddingLeft: "5%", paddingRight: "5%", backgroundImage: "linear-gradient(to right, #00C2FF, #019CF3)", paddingBottom: "20px", paddingTop: "20px" }}>
       <DataGrid
-        rows={rows}
+        rows={items}
         columns={columns}
         pageSize={7}
         rowsPerPageOptions={[7]}
