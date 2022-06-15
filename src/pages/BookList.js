@@ -11,6 +11,8 @@ import { styled } from '@mui/material/styles';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {Link} from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { setBook } from '../redux/actions/book';
 
 const filters = ["All", "For adults", "For children", "For boys", "For girls", "Fiction", "Scientific literature",
     "Kazakh literature", "Russian Literature", "World Literature", "Psyshology", "Busieness literature", "Political Science", "Philosophy", "History"    
@@ -64,6 +66,12 @@ export default function BookList() {
     }
   })
 
+  const dispatch = useDispatch();
+  const handleRead = (book) => {
+    dispatch(setBook(book));
+  };
+
+
   const filteredBooks = details.filter(
     book => {
       return (
@@ -82,22 +90,22 @@ export default function BookList() {
     setSearchField(e.target.value);
   };
 
-    const count = Math.ceil(filteredBooks.length / PER_PAGE);
-    const _DATA = usePagination(filteredBooks, PER_PAGE);
+  const count = Math.ceil(filteredBooks.length / PER_PAGE);
+  const _DATA = usePagination(filteredBooks, PER_PAGE);
 
-    const classes = useStyles();
-    const handleChange = (e, p) => {
-        setPage(p);
-        _DATA.jump(p);
-    };
+  const classes = useStyles();
+  const handleChange = (e, p) => {
+      setPage(p);
+      _DATA.jump(p);
+  };
 
-    const buttonChange = (event) => {
-        setActiveButton(event.target.value);
-    };
+  const buttonChange = (event) => {
+      setActiveButton(event.target.value);
+  };
 
-    const handle = () => {
-        setIsOpen(!isOpen);
-    }
+  const handle = () => {
+      setIsOpen(!isOpen);
+  }
   return (
     <div style={{backgroundImage:"linear-gradient(to right, #00C2FF, #019CF3)"}}>
         <Box>
@@ -127,9 +135,9 @@ export default function BookList() {
                 {
                     _DATA.currentData().map((book) => (
                             <Grid item xs={3} key={book.id}>
-                              <Link to="/book">
-                                <Book url={book.photo.url} name={book.name} author={book.author} score={book.rating}/>
-                              </Link>
+                                <Link onClick={() => handleRead(book)} to="/book">
+                                  <Book url={book.photo.url} name={book.name} author={book.author} score={book.rating}/>
+                                </Link>
                             </Grid>
                         ))  
                 }           

@@ -4,6 +4,8 @@ import Footer from '../components/Footer';
 import reactStringReplace from 'react-string-replace';
 import Header from '../components/Header';
 import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { setBasket } from '../redux/actions/basket';
 
 
 export default function BookPage() {
@@ -36,6 +38,11 @@ export default function BookPage() {
         document.documentElement.scrollTop = 0;
     }, [])
 
+    const dispatch = useDispatch();
+    const handleBasket = () => {
+        dispatch(setBasket(data));
+    };
+
   return (
     <div style={{backgroundImage:"linear-gradient(to right, #00C2FF, #019CF3)"}}>
         {data ?
@@ -61,11 +68,8 @@ export default function BookPage() {
                                     variant="contained"
                                     // key={btn}
                                 >
-                                    <Button variant="contained" size="small" sx={{backgroundColor:"white", borderRadius:1, width:128, color:'black'}}>
+                                    <Button onClick={handleBasket}  variant="contained" size="small" sx={{backgroundColor:"white", borderRadius:1, width:128, color:'black'}}>
                                         TO BASKET
-                                    </Button>
-                                    <Button variant="contained" size="small" sx={{backgroundColor:"white", borderRadius:1, width:128, color:'black'}}>
-                                        TO FAVORITE
                                     </Button>
                                 </ButtonGroup>
 
