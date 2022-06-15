@@ -51,6 +51,9 @@ export default function Account() {
                             </Typography>
                             <div className='line-clamp'>{reactStringReplace(book.description, '<P>', (match, i) => (<br/>))}</div>
                         </CardContent>
+                        <Button variant="contained" size="small" sx={{backgroundColor:"white", borderRadius:1, width:128, color:'black', position:"absolute", bottom:85, right:20}}>
+                            DISCOUNT
+                        </Button>
                         <Link to="/book">
                             <Button onClick={() => handleRead(book)} variant="contained" size="small" sx={{backgroundColor:"white", borderRadius:1, width:128, color:'black', position:"absolute", bottom:45, right:20}}>
                                 READ
