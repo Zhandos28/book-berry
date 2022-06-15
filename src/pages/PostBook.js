@@ -3,7 +3,6 @@ import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { green } from '@material-ui/core/colors';
-import Button from '@material-ui/core/Button';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
@@ -18,6 +17,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Select from '@mui/material/Select';
 import bookController from '../services/CRUD-services/Book-Controller';
 import fileUpload from '../services/CRUD-services/file-upload';
+import { blue } from '@mui/material/colors';
 
 const useStyles = makeStyles((theme) => (
   {
@@ -151,7 +151,7 @@ export default function PostBook() {
     <>
       <div style={{backgroundImage:"linear-gradient(to right, #00C2FF, #019CF3)"}}>
         <Container component="main" maxWidth="sm" sx={{ py: 4}}>  
-          <React.Fragment>
+          <>
             <Typography variant="h6" gutterBottom>
               SUBMIT BOOK
             </Typography>
@@ -291,18 +291,19 @@ export default function PostBook() {
               </div>
             </Grid>
             <div className={classes.wrapper}>
-              <Button
+              <button
                 variant="contained"
                 color="primary"
                 className={buttonClassname}
                 disabled={loading}
                 onClick={submit}
+                style={{backgroundColor: "blue", height: "50px", width: "200px", marginTop: "50px", marginBottom: "58px"}}
               >
                 {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
                   SUBMIT  
-              </Button>
+              </button>
             </div>
-          </React.Fragment>
+          </>
         </Container>
       </div>
       <Footer />

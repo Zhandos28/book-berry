@@ -5,7 +5,7 @@ import reactStringReplace from 'react-string-replace';
 import ArrowDropUpOutlinedIcon from '@mui/icons-material/ArrowDropUpOutlined';
 import ArrowDropDownOutlinedIcon from '@mui/icons-material/ArrowDropDownOutlined';
 import '../index.css';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { plusCartItem, minusCartItem } from '../redux/actions/basket';
 import { Link } from 'react-router-dom';
 
@@ -16,13 +16,13 @@ export default function Basket() {
         }
     })
 
-    const onPlusItem = (id) => {
-        useDispatch(plusCartItem(id));
-    };
+    // const onPlusItem = (id) => {
+    //     useDispatch(plusCartItem(id));
+    // };
 
-    const onMinusItem = (id) => {
-        useDispatch(minusCartItem(id));
-    };
+    // const onMinusItem = (id) => {
+    //     useDispatch(minusCartItem(id));
+    // };
 
   return (
     <div style={{backgroundImage:"linear-gradient(to right, #00C2FF, #019CF3)"}}>
@@ -51,7 +51,7 @@ export default function Basket() {
                             </Typography>
                             <div className='line-clamp'>{reactStringReplace(book.description, '<P>', (match, i) => (<br/>))}</div>
                         </CardContent>
-                        <ButtonGroup orientation="vertical" aria-label="vertical contained button group"
+                        {/* <ButtonGroup orientation="vertical" aria-label="vertical contained button group"
                                 variant="contained"
                                 sx={{height: "110px", position:"absolute", bottom: "110px", right: "20px", boxShadow: "none"}}>
                             <Button style={{width: "15px"}} onChange={onPlusItem}>
@@ -61,14 +61,16 @@ export default function Basket() {
                             <Button style={{width: "15px"}} onChange={onMinusItem}>
                                 <ArrowDropDownOutlinedIcon style={{color: 'white', }}/>
                             </Button>
-                        </ButtonGroup>
+                        </ButtonGroup> */}
                     </Box>  
                 ))}
-                <Link to="/checkout">
-                    <Button style={{float: "right", width: "150px", backgroundColor: "white", color: "black", fontWeight: 500, px:2}} onChange={onMinusItem}>
+                { basket.length > 0 && (
+                    <Link to="/checkout">
+                    <Button style={{float: "right", width: "150px", backgroundColor: "white", color: "black", fontWeight: 500, px:2}}>
                         Checkout
                     </Button>
                 </Link>
+                )}
             </Card>
         </Box>
         <Footer/>

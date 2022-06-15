@@ -3,7 +3,6 @@ import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { green } from '@material-ui/core/colors';
-import Button from '@material-ui/core/Button';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
@@ -11,6 +10,8 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Container from '@mui/material/Container';
 import Footer from '../components/Footer';
+import checkoutController from '../services/CRUD-services/Checkout-controller';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme) => (
   {
@@ -47,6 +48,12 @@ const useStyles = makeStyles((theme) => (
 ));
 
 export default function Checkout() {
+  const { basket } = useSelector(({ basket }) => {
+    return {
+        basket: basket,
+    }
+  })
+
   const classes = useStyles();
   const [loading, setLoading] = React.useState(false);
   const [success, setSuccess] = React.useState(false);
@@ -60,23 +67,48 @@ export default function Checkout() {
   const [country, setCountry] = React.useState("");
   const [phone, setPhone] = React.useState("");
   const [message, setMessage] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const books = [];
+
+  basket.forEach(element => {
+    books.push({
+      id: element.id,
+      amount: 1
+    })
+  });
 
   const buttonClassname = clsx({
     [classes.buttonSuccess]: success,
   });
 
   const handleButtonClick = () => {
-    if (!loading) {
-      setSuccess(false);
-      setLoading(true);
-      
-    }
-
-    if (true) {
-      setSuccess(true);
-      setLoading(false);
+    if (firstName && lastName && address && city && country && phone && email) {
+      if (!loading) {
+        setSuccess(false);
+        setLoading(true);
+      }
+      checkoutController.postCheckout({
+        id: 0,
+        email: email,
+        firstName: firstName,
+        lastName: lastName,
+        phoneNumber: phone,
+        country: country,
+        city: city,
+        address: address,
+        message: message,
+        amount: 1,
+        books: books
+      }).then(r => {
+        if (r) {
+          setSuccess(true);
+          setLoading(false);
+          alert("SUCCESS");
+        }
+      })
     }
   };
+
   return (
     <>
       <div style={{backgroundImage:"linear-gradient(to right, #00C2FF, #019CF3)"}}>
@@ -188,6 +220,19 @@ export default function Checkout() {
                 />
               </Grid>
               <Grid item xs={12}>
+                <TextField
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  id="email"
+                  name="email"
+                  label="Email"
+                  fullWidth
+                  autoComplete="email"
+                  variant="standard"
+                />
+              </Grid>
+              <Grid item xs={12}>
                 <FormControlLabel
                   control={<Checkbox color="secondary" name="saveAddress" value="yes" />}
                   label="Use this address for delivery details"
@@ -195,16 +240,17 @@ export default function Checkout() {
               </Grid>
             </Grid>
             <div className={classes.wrapper}>
-              <Button
+              <button
                 variant="contained"
                 color="primary"
                 className={buttonClassname}
                 disabled={loading}
                 onClick={handleButtonClick}
+                style={{backgroundColor: "blue", height: "50px", width: "200px", marginTop: "50px", marginBottom: "58px"}}
               >
                 {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
-                Checkout
-              </Button>
+                  CHECKOUT  
+              </button>
             </div>
           </React.Fragment>
         </Container>

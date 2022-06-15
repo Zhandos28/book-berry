@@ -8,8 +8,8 @@ import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
-import MenuItem from '@mui/material/MenuItem';
 import { Link } from 'react-router-dom';
+import authService from '../services/auth-services/Auth.service';
 
 import {ShoppingCartIcon, UserIcon} from '@heroicons/react/outline'
 
@@ -90,7 +90,7 @@ const Header = () => {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
+              {/* {pages.map((page) => (
                 <MenuItem key={page.title} onClick={handleCloseNavMenu}>
                   <Link to={page.link} style={{ textDecoration: 'none' }}>
                     <Button
@@ -106,7 +106,7 @@ const Header = () => {
                   </Button>
                 </Link>
                 </MenuItem>
-              ))}
+              ))} */}
             </Menu>
           </Box>
           <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' }}}>
@@ -124,8 +124,24 @@ const Header = () => {
                        page.title
                       }
                     </Button>
-                </Link>
+                  </Link>
                 ))}
+                <Link to='/signin' onClick={() => {
+                  authService.removeCurrentUser()
+                  window.window.location.href = "/signin";
+                }} style={{ textDecoration: 'none' }}>  
+                    <Button
+                        key={'Log Out'}
+                        onClick={changeBtn}
+                        sx={activeBtn === 'Log Out' ? {height:"inherit", backgroundColor:"inherit", color:"white", outline: "none", fontSize:17, borderRadius:0, borderBottom:"1px solid", textDecoration: 'none'}: 
+                        {height:"inherit", backgroundColor:"inherit", color:"white", outline: "none", fontSize:17, borderRadius:0, textDecoration: 'none'}}
+                        value={'Log Out'}  
+                    >
+                      {
+                       'Log Out'
+                      }
+                    </Button>
+                  </Link>
             </Box>
           </Box>
         </Toolbar>

@@ -160,24 +160,15 @@ export default function SignUp() {
                     variant="contained"
                     sx={{ mt: 3, mb: 2, height: 45,  backgroundColor: '#724DFF'}}
                 >
-                    Sign In
+                    Sign Up
                 </Button>
                 <Grid container>
-                    <Grid item xs>
-                    <Typography sx={{fontSize: 14}}>
-                    Questions? Email us at 
-                    </Typography>
-                    <Link href="#" variant="body2">
-                        support@bookberry.kz
+                  <Grid item>
+                    <Link href='/signin' variant="body2" style={{cursor: "pointer"}}>
+                      Sign In
                     </Link>
-                    </Grid>
-                    <Grid item>
-                    <Link href="#" variant="body2">
-                        {"Don't have an account? Sign Up"}
-                    </Link>
-                    </Grid>
+                  </Grid>
                 </Grid>
-                <Copyright sx={{ mt: 5 }} />
                 </Box>
             </Box>
           </Box>
