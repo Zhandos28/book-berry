@@ -4,6 +4,9 @@ import Footer from '../components/Footer';
 import reactStringReplace from 'react-string-replace';
 import ArrowDropUpOutlinedIcon from '@mui/icons-material/ArrowDropUpOutlined';
 import ArrowDropDownOutlinedIcon from '@mui/icons-material/ArrowDropDownOutlined';
+import '../index.css';
+import { useSelector, useDispatch } from 'react-redux';
+import { plusCartItem, minusCartItem } from '../redux/actions/basket';
 
 const data = [{
     "id": "547317",
@@ -68,16 +71,15 @@ const data = [{
 ]
 
 export default function Basket() {
-  const [value, setValue] = React.useState();
-  const [isSellectedAll, setIsSellectedAll] = React.useState(false); 
+    const items = useSelector(({ basket }) => basket)
 
-  const handleChange = (event) => {
-    setValue(event.target.value);
-  } 
+    const onPlusItem = (id) => {
+        useDispatch(plusCartItem(id));
+    };
 
-  const handleSelect = () => {
-    setIsSellectedAll(!isSellectedAll);
-  }
+    const onMinusItem = (id) => {
+        useDispatch(minusCartItem(id));
+    };
 
   return (
     <div style={{backgroundImage:"linear-gradient(to right, #00C2FF, #019CF3)"}}>
@@ -85,17 +87,14 @@ export default function Basket() {
             <Typography sx={{color:"white", fontSize:30, textAlign: "center"}}>
                 Basket
             </Typography>
-            <Typography sx={{color:"white", fontSize:22, mt:1}}>
-                <input type="checkbox" name="all" onChange={handleSelect} id="all-select"/><label for="all-select">Select all</label>
-            </Typography>
+            {/* <Typography sx={{color:"white", fontSize:22, mt:1}}>
+                <label for="all-select">Select all</label>
+            </Typography> */}
             <Card sx={{display:"block", px:"auto", backgroundColor:"inherit", my:1, border:"none", boxShadow: "none"}}>
                 {
                     data.map((book) => ( 
                     <Box key={book.id} sx={{ position:"relative", pb:5, mt:1, display: "flex"}}>  
-                        <CardActions sx={{display:"flex", py:2, justifyContent:"space-between"}}> 
-                            {isSellectedAll ?  <input type="checkbox" checked name="all" onChange={handleSelect} id="all-select"/> : 
-                                <input type="checkbox" name="all" onChange={handleSelect} id="all-select"/>
-                            }   
+                        <CardActions sx={{display:"flex", py:2, justifyContent:"space-between"}}>   
                             <CardMedia
                                 component="img"
                                 height="185"
@@ -112,10 +111,14 @@ export default function Basket() {
                         </CardContent>
                         <ButtonGroup orientation="vertical" aria-label="vertical contained button group"
                                 variant="contained"
-                                sx={{height: "110px", position:"absolute", bottom: "110px", right: "20px"}}>
-                            <ArrowDropUpOutlinedIcon style={{color: 'white', }}/>
-                            <input style={{width: '20px'}}/>
-                            <ArrowDropDownOutlinedIcon style={{color: 'white', }}/>
+                                sx={{height: "110px", position:"absolute", bottom: "110px", right: "20px", boxShadow: "none"}}>
+                            <Button style={{width: "15px"}} onChange={onPlusItem}>
+                                <ArrowDropUpOutlinedIcon style={{color: 'white',}}/>
+                            </Button>
+                            <input style={{width: '32px', textAlign: "center"}} type="number" max={5} min={0} value={4}/>
+                            <Button style={{width: "15px"}} onChange={onMinusItem}>
+                                <ArrowDropDownOutlinedIcon style={{color: 'white', }}/>
+                            </Button>
                         </ButtonGroup>
                     </Box>  
                    ))
