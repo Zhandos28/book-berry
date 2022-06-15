@@ -74,9 +74,13 @@ export default function PostBook() {
   const [success, setSuccess] = React.useState(false);
 
   // for submit
-  const [firstName, setFirstName] = React.useState("");
-  const [lastName, setLastName] = React.useState("");
-  const [pages, setPages] = React.useState(0);
+  const [name, setName] = React.useState("");
+  const [author, setAuthor] = React.useState("");
+  const [pages, setPages] = React.useState("");
+  const [language, setLanguage] = React.useState("");
+  const [quantity, setQuantity] = React.useState("");
+  const [ageLimit, setAgeLimit] = React.useState("");
+  const [photo, setPhoto] = React.useState();
 
   // description
   const [description, setDescription] = React.useState('');
@@ -100,31 +104,70 @@ export default function PostBook() {
     [classes.buttonSuccess]: success,
   });
 
+  // photo
+  const [selectedImage, setSelectedImage] = React.useState();
+  let formData = new FormData();
+
+  const uploadImage = (event) => {
+    for (let key in event.target.files) {
+        if(typeof event.target.files[key] === 'object' && event.target.files[key].type.split('/')[0] === "image") {
+            setSelectedImage(event.target.files[key]);
+        }
+    }
+  }
+
   const submit = () => {
     if (!loading) {
       setSuccess(false);
       setLoading(true);
-      
+      setSuccess(true);
+      setLoading(false); 
     }
 
+    // [
+      //   {
+      //     id: 0,
+      //     name: "string"
+      //   }
+      // ],
+
+    let d = {
+      name: name,
+      description: description,
+      ageLimit: ageLimit,
+      author: author,
+      language: language,
+      quantity: quantity,
+      categories: categories,
+      numberOfPage: pages,
+      photo: {
+        name: "",
+        url: ""
+      }
+    }
+
+    console.log(d);
     if (false) {
+      if(selectedImage) {
+        // formData.append("file", image)
+        // fileStorageController.getFileUrl(formData).then(r => {
+        //   r.forEach(image => {
+        //       setPhoto({photoAddress: image.url, filename: image.filename});
+        //   });
+        // })    
+      }
       bookController.postNewBook({
-        name: "string",
-        description: "string",
-        ageLimit: 0,
-        author: "string",
-        language: 0,
-        quantity: 0,
-        categories: [
-          {
-            id: 0,
-            name: "string"
-          }
-        ],
-        numberOfPage: 0,
+        name: name,
+        description: description,
+        ageLimit: ageLimit,
+        author: author,
+        language: language,
+        quantity: quantity,
+        categories: categories,
+        numberOfPage: pages,
         photo: {
-          name: "string",
-          url: "string"
+          name: "",
+          url: ""
         }
       }).then(r => {
         if (r) {
@@ -145,8 +188,8 @@ export default function PostBook() {
             <Grid container spacing={3}>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                   required
                   id="name"
                   name="name"
@@ -158,8 +201,8 @@ export default function PostBook() {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  value={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
+                  value={author}
+                  onChange={(e) => setAuthor(e.target.value)}
                   required
                   id="author"
                   name="author"
@@ -179,6 +222,54 @@ export default function PostBook() {
                   maxRows={4}
                   value={description}
                   onChange={handleChangeDescription}
+                  variant="standard"
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  value={pages}
+                  onChange={(e) => setPages(e.target.value)}
+                  id="pages"
+                  name="pages"
+                  required
+                  label="Number of Pages"
+                  fullWidth
+                  variant="standard"
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  value={language}
+                  onChange={(e) => setLanguage(e.target.value)}
+                  id="pages"
+                  name="pages"
+                  required
+                  label="Language"
+                  fullWidth
+                  variant="standard"
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  value={quantity}
+                  onChange={(e) => setQuantity(e.target.value)}
+                  id="pages"
+                  name="pages"
+                  required
+                  label="Quantity"
+                  fullWidth
+                  variant="standard"
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  value={ageLimit}
+                  onChange={(e) => setAgeLimit(e.target.value)}
+                  id="pages"
+                  name="pages"
+                  required
+                  label="Age limit"
+                  fullWidth
                   variant="standard"
                 />
               </Grid>
@@ -205,18 +296,29 @@ export default function PostBook() {
                   </Select>
                 </FormControl>
               </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  value={pages}
-                  onChange={(e) => setPages(e.target.value)}
-                  id="pages"
-                  name="pages"
-                  required
-                  label="Number of Pages"
-                  fullWidth
-                  variant="standard"
-                />
-              </Grid>
+              <div sx={{ mt: 6 }}>
+                <div className="preview">
+                  {selectedImage && (
+                    <div style={{ width: "600px" }}>
+                      <div style={{ width: "160px", height: "128px", position: "relative", display: "inline-block", marginTop: "4px", marginBottom: "4px" }}>
+                        <img alt="not fount" src={URL.createObjectURL(selectedImage)} style={{ height: "200px", width: "400px", objectPosition: "center", objectFit: "contain" }}/>
+                      </div>
+                    </div>
+                  )}
+                </div>
+                <div className='mt-3 inline-block text-center' style={{ marginTop: "12px", display: "inline-block", textAlign: "center"}}>
+                    <label htmlFor="image_uploads" className="flex w-48 items-center justify-center" style={{ display: "flex", justifyContent: "center", width: "100px", alignItems: 'center', height: "40px", backgroundColor: "blue", borderRadius:4}}>
+                        Photo
+                        <input
+                          type="file"
+                          id="image_uploads"
+                          onChange={uploadImage}
+                          style={{ visibility: "hidden" }}
+                          multiple
+                        />
+                    </label>
+                </div>
+              </div>
             </Grid>
             <div className={classes.wrapper}>
               <Button
