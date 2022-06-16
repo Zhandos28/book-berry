@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "https://0850-37-99-39-21.eu.ngrok.io";
+const API_URL = "https://6b48-37-99-36-176.eu.ngrok.io";
 const config = {
     headers: {
         'Content-Type': 'application/json'

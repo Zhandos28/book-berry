@@ -85,10 +85,10 @@ export default function BookPage() {
                         Characteristics
                     </Typography>
                     <Typography sx={{fontSize:14, color:"white"}}>
-                        Age limit: 16+
+                        Age limit: {data.ageLimit}+
                     </Typography>
                     <Typography sx={{fontSize:14, color:"white"}}>
-                        Publishers: Eksmo
+                        Publishers: {data.publisher.firstName + " " + data.publisher.lastName}
                     </Typography>
                     <Typography sx={{fontSize:14, color:"white"}}>
                         Authors: {data.author}
